@@ -1,5 +1,5 @@
 # Data Loading
-salary_data <- read.table("../salary.txt", header = TRUE, sep = "", stringsAsFactors = FALSE)
+salary_data <- read.table("salary.txt", header = TRUE, sep = "", stringsAsFactors = FALSE)
 
 # Data Processing
 salary_data <- salary_data %>%
