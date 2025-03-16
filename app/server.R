@@ -1,3 +1,8 @@
+library(tidyverse)
+library(dplyr)
+library(GGally)
+library(broom)
+
 # Data Loading
 salary_data <- read.table("salary.txt", header = TRUE, sep = "", stringsAsFactors = FALSE)
 

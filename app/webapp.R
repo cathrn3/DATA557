@@ -1,8 +1,4 @@
 library(shiny)
-library(tidyverse)
-library(dplyr)
-library(GGally)
-library(broom)
 source("ui.R")
 source("server.R")
 
