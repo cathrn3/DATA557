@@ -1,3 +1,5 @@
+library(shinydashboard)
+
 ui <- dashboardPage(
   dashboardHeader(
     title = "Gender Bias in Granting Salary Increases (1990-1995)",
