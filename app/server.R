@@ -27,7 +27,6 @@ cleaned_data <- salary_data %>%
 salary_data_static <- cleaned_data %>%
   filter(!is.nan(avgraise)) %>%
   mutate(years_experience = year - startyr)
-View(salary_data_static)
 
 # Helper functions
 interactive_section <- function(input, output) {
