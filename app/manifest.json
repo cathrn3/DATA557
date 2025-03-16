@@ -3563,14 +3563,17 @@
     }
   },
   "files": {
+    "salary.txt": {
+      "checksum": "c1877acacb816cbc090ca4702514d658"
+    },
     "server.R": {
-      "checksum": "8e990917ea982486e03534da294daac2"
+      "checksum": "73345fde66ebc558761869436b866c38"
     },
     "ui.R": {
       "checksum": "f3c13a1d61d443a233e475dd7b1f6e83"
     },
     "webapp.R": {
-      "checksum": "6233eba8a6377d5adc50c1a899f609ca"
+      "checksum": "0a359c1610ac30df9691576a391d3843"
     },
     "www/styles.css": {
       "checksum": "a319ea0f64daf41bf5b6767e8c1b31e1"
