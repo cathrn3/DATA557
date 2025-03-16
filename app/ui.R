@@ -3,7 +3,7 @@ library(shinydashboard)
 ui <- dashboardPage(
   dashboardHeader(
     title = "Gender Bias in Granting Salary Increases (1990-1995)",
-    titleWidth = 500
+    titleWidth = 600
   ),
   dashboardSidebar(
     sidebarMenu(

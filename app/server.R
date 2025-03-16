@@ -16,7 +16,6 @@ salary_data <- salary_data %>%
   mutate(percentraise = (salary - lag(salary)) / lag(salary) * 100) %>%
   mutate(avgraise = mean(percentraise, na.rm = TRUE)) %>%
   mutate(promoted = ifelse(rank == first(rank) & rank == last(rank), 0, 1)) %>%
-  mutate(admin_changed = ifelse(admin == first(admin) & admin == last(admin), 0, 1)) %>%
   ungroup()
 
 cleaned_data <- salary_data %>%
@@ -42,10 +41,6 @@ interactive_section <- function(input, output) {
       input$promo == "Exclude Promoted" ~ c(0),
       input$promo == "Only Promoted" ~ c(1)
     )
-    admin_filter <- case_when(
-      input$admin_changed == "Include Changed" ~ c(0, 1),
-      input$admin_changed == "Exclude Changed" ~ c(0)
-    )
     
     # Collapse data
     collapsed_data <- salary_data %>%
@@ -61,7 +56,6 @@ interactive_section <- function(input, output) {
         field %in% fields,
         deg %in% degrees,
         promoted %in% promo_filter,
-        admin_changed %in% admin_filter,
         !is.nan(avgraise)
       )
     
@@ -282,17 +276,7 @@ server <- function(input, output, session) {
             )
           ),
           c("Include Promoted", "Exclude Promoted", "Only Promoted"))
-        ),
-        selectInput("admin_changed",
-          label = tagList(
-            "Filter by admin changed status: ",
-            HTML("<i class='fa fa-info-circle info-icon'
-               data-toggle='tooltip'
-               title='Accounts for individuals whos admin status changed during years 90-95'>
-             </i>"
-            )
-          ),
-          c("Include Changed", "Exclude Changed"))
+        )
       )
       
       tagList(model, data)
