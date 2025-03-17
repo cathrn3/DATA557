@@ -22,6 +22,19 @@ ui <- dashboardPage(
       tabItem(tabName = "interactive",
               fluidRow(
                 column(
+                  width = 12,
+                  box (
+                    status = "info",
+                    width = NULL,
+                    HTML('<div style="word-wrap: break-word; max-width: 100%;">An interactive playground that aims to explore the question "Has sex bias existed in granting salary increases between 1990 - 1995?"
+                    by fitting various linear regression models to the data.
+                    Select additional predictor variables and the number of interaction terms you want to add to the base model in the Model menu.
+                    Filter your data with the options in the Data menu.</div>')
+                  )
+                )
+              ),
+              fluidRow(
+                column(
                   width = 6,
                   box(
                     title = "Row count",
@@ -74,6 +87,17 @@ ui <- dashboardPage(
 
       # Static Visualizations Tab
       tabItem(tabName = "static",
+              fluidRow(
+                column(
+                  width = 12,
+                  box (
+                    status = "info",
+                    solidHeader = TRUE,
+                    width = NULL,
+                    HTML('<div style="word-wrap: break-word; max-width: 100%;">An exploration of the differences observed in granting salary increases between men and women in the years 1990 - 1995. </div>')
+                  )
+                )
+              ),
               fluidRow(
                 box(width = 12, status = "warning", solidHeader = TRUE,
                     h3("Salary Increment by Degree - Means are roughly the same"),
