@@ -81,9 +81,14 @@ interactive_section <- function(input, output) {
   })
   
   # Outputs
-  output$rows <- renderPrint(
-    cat(format(nrow(final_data())))
-  )
+  output$rows <- renderPrint({
+    counts <- final_data() %>%
+      group_by(sex) %>%
+      summarise(count = n()) %>%
+      ungroup
+    print(as.data.frame(counts))
+    cat("Total:", nrow(final_data()))
+  })
   
   output$model_plot <- renderPlot({
     p <- ggplot(final_data(), aes(x = sex, y = avgraise, fill = sex)) +
@@ -98,24 +103,41 @@ interactive_section <- function(input, output) {
   )
   
   output$model_summary <- renderPrint({
-    # Print summary with the "Call" line removed
-    model_summary <- summary(model_fit())
-    model_summary_text <- capture.output(print(model_summary))
-    
-    residuals_index <- grep("^Residuals:", model_summary_text)
-    model_summary_text <- model_summary_text[residuals_index: length(model_summary_text)]
-    
-    cat(model_summary_text, sep = "\n")
+    tryCatch({
+      # Print summary with the "Call" line removed
+      model_summary <- summary(model_fit())
+      model_summary_text <- capture.output(print(model_summary))
+      
+      residuals_index <- grep("^Residuals:", model_summary_text)
+      model_summary_text <- model_summary_text[residuals_index: length(model_summary_text)]
+      
+      cat(model_summary_text, sep = "\n")
+    }, error = function(e) {
+      # In case of an error, print the error message
+      cat("Error: ", e$message)
+    })
   })
   
-  output$conf_int <- renderPrint(
-    cat("95% confidence interval for 'sexM': [", confint(model_fit())['sexM', ][1], ", ", confint(model_fit())['sexM', ][2], "]\n")
-  )
+  output$conf_int <- renderPrint({
+    tryCatch({
+      # Try to get the model formula and print it
+      cat("95% confidence interval for 'sexM': [", confint(model_fit())['sexM', ][1], ", ", confint(model_fit())['sexM', ][2], "]\n")
+    }, error = function(e) {
+      # In case of an error, print the error message
+      cat("Error: ", e$message)
+    })
+  })
   
   output$model_residuals <- renderPlot({
-    model <- model_fit()
-    p <- plot(model$fitted.values, model$residuals)
-    p
+    tryCatch({
+      # Try to get the model formula and print it
+      model <- model_fit()
+      p <- plot(model$fitted.values, model$residuals)
+      p
+    }, error = function(e) {
+      # In case of an error, print the error message
+      cat("Error: ", e$message)
+    })
   })
 }
 
